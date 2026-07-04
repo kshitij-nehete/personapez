@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PersonaPez</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <!-- Corner accent lines (decorative, sci-fi feel) -->
+      <div class="corner corner-tl"></div>
+      <div class="corner corner-tr"></div>
+      <div class="corner corner-bl"></div>
+      <div class="corner corner-br"></div>
+
+      <!-- Header: title, status, log line, persona tabs -->
+      <header>
+        <div class="title-row">
+          <div class="status-dot"></div>
+          <h1>PersonaPez</h1>
+        </div>
+
+        <div class="tabs">
+          <button class="tab active" data-persona="hitesh">
+            <div class="tab-name-row">
+              <span class="dot"></span>
+              Hitesh Choudhary
+            </div>
+            <div class="role">Chai aur Code</div>
+          </button>
+          <button class="tab" data-persona="piyush">
+            <div class="tab-name-row">
+              <span class="dot"></span>
+              Piyush Garg
+            </div>
+            <div class="role">Chai aur Code</div>
+          </button>
+        </div>
+      </header>
+
+      <!-- Starter question chips — populated by app.js from /api/personas -->
+      <div class="starters" id="starters"></div>
+
+      <!-- Chat message log -->
+      <div class="log" id="log">
+        <div class="empty" id="emptyState">
+          // tap a suggested question below<br />
+          // or type your own
+        </div>
+      </div>
+
+      <!-- Disclaimer footer -->
+      <div class="disclaimer">
+        AI persona simulation for demo purposes — not the real individuals.
+      </div>
+
+      <!-- Message composer -->
+      <form class="composer" id="composer">
+        <textarea
+          id="input"
+          rows="1"
+          placeholder="Message Hitesh..."
+          autofocus
+        ></textarea>
+        <button class="send-btn" id="sendBtn" type="submit">Send</button>
+      </form>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

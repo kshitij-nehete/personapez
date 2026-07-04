@@ -1,0 +1,431 @@
+/* ─── Reset ──────────────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html,
+body {
+  height: 100%;
+  font-family: "Outfit", sans-serif;
+}
+
+/* ─── App shell ──────────────────────────────────────────────────────────────── */
+body {
+  background: #0b0e14;
+  color: #e2e8f0;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.app {
+  width: 100%;
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* ─── Corner accents ─────────────────────────────────────────────────────────── */
+.corner {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  z-index: 2;
+  pointer-events: none;
+}
+.corner-tl {
+  top: 10px;
+  left: 10px;
+  border-top: 2px solid #38bdf860;
+  border-left: 2px solid #38bdf860;
+}
+.corner-tr {
+  top: 10px;
+  right: 10px;
+  border-top: 2px solid #38bdf860;
+  border-right: 2px solid #38bdf860;
+}
+.corner-bl {
+  bottom: 10px;
+  left: 10px;
+  border-bottom: 2px solid #38bdf860;
+  border-left: 2px solid #38bdf860;
+}
+.corner-br {
+  bottom: 10px;
+  right: 10px;
+  border-bottom: 2px solid #38bdf860;
+  border-right: 2px solid #38bdf860;
+}
+
+/* ─── Header ─────────────────────────────────────────────────────────────────── */
+header {
+  padding: 22px 20px 16px;
+  border-bottom: 1px solid #1e293b;
+}
+
+.title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+h1 {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+/* Pulsing online indicator */
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #34d399;
+  box-shadow: 0 0 8px #34d399;
+  animation: pulse 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.log-line {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  color: #475569;
+  letter-spacing: 0.03em;
+}
+.log-line .hl {
+  color: #818cf8;
+}
+
+/* ─── Persona tabs ───────────────────────────────────────────────────────────── */
+.tabs {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.tab {
+  flex: 1;
+  border: 1px solid #1e293b;
+  background: transparent;
+  color: #64748b;
+  font-family: "Outfit", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  transition:
+    border-color 0.2s,
+    color 0.2s,
+    background 0.2s;
+}
+
+.tab .role {
+  font-size: 10px;
+  font-weight: 400;
+  opacity: 0.7;
+}
+
+.tab-name-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Inactive tab indicator dot */
+.tab .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #334155;
+  transition:
+    background 0.2s,
+    box-shadow 0.2s;
+}
+
+/* Active states per persona */
+.tab.active[data-persona="hitesh"] {
+  border-color: #38bdf870;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.06);
+}
+.tab.active[data-persona="hitesh"] .dot {
+  background: #38bdf8;
+  box-shadow: 0 0 8px #38bdf8;
+}
+
+.tab.active[data-persona="piyush"] {
+  border-color: #818cf870;
+  color: #818cf8;
+  background: rgba(129, 140, 248, 0.06);
+}
+.tab.active[data-persona="piyush"] .dot {
+  background: #818cf8;
+  box-shadow: 0 0 8px #818cf8;
+}
+
+/* ─── Starter question chips ─────────────────────────────────────────────────── */
+.starters {
+  display: flex;
+  gap: 8px;
+  padding: 14px 20px 0;
+  flex-wrap: wrap;
+}
+
+.chip {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11.5px;
+  border: 1px dashed #1e293b;
+  color: #94a3b8;
+  background: #10151f;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition:
+    border-color 0.2s,
+    color 0.2s;
+  text-align: left;
+}
+.chip:hover {
+  border-color: var(--persona-color, #38bdf8);
+  color: var(--persona-color, #38bdf8);
+}
+
+/* ─── Chat log ───────────────────────────────────────────────────────────────── */
+.log {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 20px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Empty state prompt */
+.empty {
+  margin: auto;
+  text-align: center;
+  color: #334155;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  line-height: 1.8;
+}
+
+/* ─── Message rows ───────────────────────────────────────────────────────────── */
+.row {
+  display: flex;
+  gap: 10px;
+  max-width: 100%;
+}
+.row.user {
+  flex-direction: row-reverse;
+}
+
+/* ─── Static persona avatar ───────────────────────────────────────────────────── */
+.avatar {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  margin-top: 2px;
+  border-radius: 50%;
+  background: #10151f;
+  border: 1.5px solid var(--persona-color, #38bdf8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--persona-color, #38bdf8);
+  letter-spacing: 0;
+}
+
+/* ─── Bubble column ──────────────────────────────────────────────────────────── */
+.bubble-col {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 82%;
+}
+.row.user .bubble-col {
+  align-items: flex-end;
+}
+
+.sender {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #475569;
+}
+
+.bubble {
+  background: #10151f;
+  border: 1px solid #1e293b;
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 14.5px;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Assistant bubble: colored left border */
+.row.assistant .bubble {
+  border-left: 2px solid var(--persona-color, #38bdf8);
+}
+
+/* User bubble: slightly different background */
+.row.user .bubble {
+  background: #0f1a2b;
+  border-color: #1e2f4a;
+}
+
+/* Streaming cursor */
+.cursor {
+  display: inline-block;
+  width: 6px;
+  height: 14px;
+  background: var(--persona-color, #38bdf8);
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  animation: blink 0.9s step-end infinite;
+}
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Timestamp */
+.timestamp {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  color: #334155;
+  padding: 0 2px;
+}
+
+/* ─── Typing indicator ───────────────────────────────────────────────────────── */
+.typing .bubble {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  padding: 12px 14px;
+}
+.typing .dot2 {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--persona-color, #38bdf8);
+  animation: bounce 1s infinite ease-in-out;
+}
+.typing .dot2:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.typing .dot2:nth-child(3) {
+  animation-delay: 0.3s;
+}
+@keyframes bounce {
+  0%,
+  60%,
+  100% {
+    opacity: 0.3;
+    transform: translateY(0);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(-3px);
+  }
+}
+
+/* ─── Composer ───────────────────────────────────────────────────────────────── */
+.composer {
+  display: flex;
+  gap: 10px;
+  padding: 14px 20px calc(14px + env(safe-area-inset-bottom));
+  border-top: 1px solid #1e293b;
+  background: #0b0e14;
+}
+
+.composer textarea {
+  flex: 1;
+  resize: none;
+  background: #10151f;
+  border: 1px solid #1e293b;
+  border-radius: 10px;
+  color: #e2e8f0;
+  font-family: "Outfit", sans-serif;
+  font-size: 14.5px;
+  padding: 11px 14px;
+  max-height: 120px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.composer textarea:focus {
+  border-color: #38bdf870;
+}
+.composer textarea::placeholder {
+  color: #334155;
+}
+
+.send-btn {
+  border: none;
+  border-radius: 10px;
+  padding: 0 20px;
+  background: #38bdf8;
+  color: #0b0e14;
+  font-family: "Outfit", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    box-shadow 0.2s;
+  white-space: nowrap;
+}
+.send-btn:hover {
+  background: #7dd3fc;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.4);
+}
+.send-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ─── Disclaimer ─────────────────────────────────────────────────────────────── */
+.disclaimer {
+  text-align: center;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 9.5px;
+  color: #334155;
+  padding: 6px 20px 0;
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 3px;
+}
