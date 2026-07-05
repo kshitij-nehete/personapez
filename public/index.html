@@ -14,17 +14,19 @@
   </head>
   <body>
     <div class="app">
-      <!-- Corner accent lines (decorative, sci-fi feel) -->
       <div class="corner corner-tl"></div>
       <div class="corner corner-tr"></div>
       <div class="corner corner-bl"></div>
       <div class="corner corner-br"></div>
 
-      <!-- Header: title, status, log line, persona tabs -->
       <header>
         <div class="title-row">
           <div class="status-dot"></div>
           <h1>PersonaPez</h1>
+        </div>
+        <div class="log-line">
+          // persona loaded:
+          <span class="hl" id="loadedLabel">hitesh_persona.json</span>
         </div>
 
         <div class="tabs">
@@ -45,10 +47,8 @@
         </div>
       </header>
 
-      <!-- Starter question chips — populated by app.js from /api/personas -->
       <div class="starters" id="starters"></div>
 
-      <!-- Chat message log -->
       <div class="log" id="log">
         <div class="empty" id="emptyState">
           // tap a suggested question below<br />
@@ -56,12 +56,10 @@
         </div>
       </div>
 
-      <!-- Disclaimer footer -->
       <div class="disclaimer">
         AI persona simulation for demo purposes — not the real individuals.
       </div>
 
-      <!-- Message composer -->
       <form class="composer" id="composer">
         <textarea
           id="input"
@@ -73,6 +71,7 @@
       </form>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="app.js"></script>
   </body>
 </html>
